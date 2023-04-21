@@ -1,0 +1,4 @@
+rootProject.name = 'pg-graph-demo'
+include 'non-recursive'
+include 'recursive'
+include 'common'

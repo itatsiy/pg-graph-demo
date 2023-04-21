@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <property name="HOME_DIR" value="logs/"/>
+    <property name="APP_LOG" value="sfera-artifactsmanager-backend-api"/>
+    <property name="ERROR_LOG" value="sfera-artifactsmanager-backend-api-error"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="APP-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${HOME_DIR}/${APP_LOG}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${HOME_DIR}/archived/${APP_LOG}.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <maxFileSize>5MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${HOME_DIR}/${ERROR_LOG}.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${HOME_DIR}/archived/${ERROR_LOG}.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <maxFileSize>5MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="APP-ROLLING"/>
+        <appender-ref ref="ERROR-ROLLING"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

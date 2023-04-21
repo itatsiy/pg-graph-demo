@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/1.0.0/db.changelog-v.1.0.0-cumulative.yaml
+  - changeSet:
+      id: initialize
+      author: itatsiy
+      changes:
+        - sqlFile:
+            path: 01-initialize.sql
+            splitStatements: false
+            relativeToChangelogFile: true

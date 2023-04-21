@@ -1,0 +1,22 @@
+server:
+  port: ${APP_PORT:8091}
+logging:
+  config: classpath:logback.xml
+spring:
+  jpa:
+    open-in-view: false
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/pg_graph_demo_recursive?prepareThreshold=0
+    username: postgres
+    password: postgres
+    hikari:
+      maximum-pool-size: 20
+  liquibase:
+    enabled: true
+    liquibase-schema: ${DB_PG_SCHEMA:public}
+  jackson:
+    default-property-inclusion: non_null
+springdoc:
+  swagger-ui:
+    path: /swagger-ui

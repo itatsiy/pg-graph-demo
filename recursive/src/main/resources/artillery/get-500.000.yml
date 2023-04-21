@@ -1,0 +1,8 @@
+config:
+  target: "http://localhost:8091"
+scenarios:
+  - flow:
+      - loop:
+          - get:
+              url: "/api/v1/nodes/1"
+        count: 10000
